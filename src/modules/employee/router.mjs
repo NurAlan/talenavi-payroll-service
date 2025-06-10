@@ -1,20 +1,9 @@
-import { Router } from "express"
+import { Router } from 'express'
+import { verifyJWT } from '../../middlewares/jwtAuth.mjs'
+import { validateSchema } from '../../middlewares/validator.mjs'
+import wrapAsync from '../../helpers/utils/wrapAsync.mjs'
 const router = Router()
 
-router.get('/', (req, res) => {
-  try {
-    res.status(200).json({
-      success: true,
-      data: null,
-      code: 200
-    })
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      data: null,
-      message: error
-    })
-  }
-})
+router.post('/create', verifyJWT)
 
 export default router

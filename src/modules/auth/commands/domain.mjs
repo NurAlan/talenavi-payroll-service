@@ -1,7 +1,7 @@
 import jwtSign from '../../../middlewares/jwtSign.mjs'
 import Query from '../queries/query.mjs'
 import db from '../../../models/index.mjs'
-import { InternalServerError, NotFoundError, UnauthorizedError } from '../../../helpers/utils/response.mjs'
+import { NotFoundError, UnauthorizedError } from '../../../helpers/utils/response.mjs'
 import _ from 'lodash'
 import { verifyhash } from '../../../helpers/utils/argon2.mjs'
 
