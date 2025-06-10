@@ -6,6 +6,11 @@ export default class Command {
     this.db = db
   }
 
+  /**
+   * 
+   * @param {{userId: integer, position: string, baseSalary: integer}} payload 
+   * @returns 
+   */
   async createEmployee(payload) {
     return await this.db.Employee.create(payload)
   }

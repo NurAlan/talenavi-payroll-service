@@ -5,7 +5,8 @@ export default {
       user_id: {
         type: Sequelize.INTEGER,
         references: { model: 'user', key: 'id' },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        unique: true,
       },
       position: {
         type: Sequelize.STRING

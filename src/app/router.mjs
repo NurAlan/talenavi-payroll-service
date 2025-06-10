@@ -6,7 +6,7 @@ import user from '../modules/user/router.mjs'
 
 const router = Router()
 
-router.use('/employe', employeRouter)
+router.use('/employee', employeRouter)
 router.use('/auth', auth)
 router.use('/admin', admin)
 router.use('/user', user)

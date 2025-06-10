@@ -1,15 +1,20 @@
 export default (sequelize, DataTypes) => {
   const Employee = sequelize.define('employee', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    user_id: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     position: DataTypes.STRING,
-    base_salary: DataTypes.INTEGER,
+    baseSalary: DataTypes.INTEGER,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true
     }
+  },{
+    tableName: 'employee',
+    underscored: true,
+    timestamps: true,
+    paranoid: true
   })
 
   Employee.associate = models => {
