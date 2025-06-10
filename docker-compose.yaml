@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecret
+      MYSQL_DATABASE: payroll
+      MYSQL_USER: nobita
+      MYSQL_PASSWORD: COK@ScOTNbK9
+    ports:
+      - "3306:3306"
+    volumes: 
+      - ./mysqldata:/var/lib/mysql
+    networks:
+      - talenavi
+
+networks:
+  talenavi:
+    external: true
