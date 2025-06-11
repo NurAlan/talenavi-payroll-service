@@ -1,7 +1,7 @@
 export default (sequelize, DataTypes) => {
-  const Attendance = sequelize.define('attendance', {
+  const Attendance = sequelize.define('Attendance', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    employee_id: DataTypes.INTEGER,
+    employeeId: DataTypes.INTEGER,
     date: DataTypes.DATEONLY,
     time: DataTypes.TIME,
     status: DataTypes.ENUM('hadir', 'terlambat', 'cuti', 'alfa'),
@@ -11,6 +11,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: true
     }
+  },
+  {
+    tableName: 'attendance',
+    underscored: true,
+    timestamps: true,
+    paranoid: true
   })
 
   Attendance.associate = models => {
