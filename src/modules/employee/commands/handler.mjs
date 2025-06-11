@@ -14,6 +14,30 @@ export const create = async(req, res) => {
   })
 }
 
+export const update = async(req, res) => {
+  const updateData = await employee.update(
+    {...req.locals.validated.body, ...req.locals.validated.params},
+    req.user.data
+  )
+  return response(res, {
+    message: 'update employee successfully',
+    data: updateData
+  })
+}
+
+export const destroy = async(req, res) => {
+  const updateData = await employee.destroy(
+    req.locals.validated.params,
+    req.user.data
+  )
+  return response(res, {
+    message: 'delete employee successfully',
+    data: updateData
+  })
+}
+
 export default {
-  create
+  create,
+  update,
+  destroy
 }

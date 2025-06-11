@@ -29,3 +29,5 @@ export const mysqlConf = {
   password: getenv('MYSQL_PASSWORD', 'abrakadabra'),
   database: getenv('MSYQL_DATABASE', 'payroll')
 }
+
+export const defaultPassword = getenv('DEFAULT_PASSWORD', 'spongebob')

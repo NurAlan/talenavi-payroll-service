@@ -42,8 +42,24 @@ export default class Query {
       where: {
         id, role: 'employee'
       },
-      attributes: ['id'],
+      attributes: ['id', 'email'],
       raw: true
+    })
+  }
+
+  /**
+   * 
+   * @param { {id: string, email: string} } payload 
+   */
+  async findUserEmail(payload) {
+    return this.db.User.findOne({
+      where: {
+        id: {
+          [Op.ne]: payload.id
+        },
+        email: payload.email
+      },
+      attributes: ['id']
     })
   }
 }

@@ -34,7 +34,7 @@ export default class Query {
   /**
    * 
    * @param {String} id 
-   * @return {Promise<{id: string}>}
+   * @return {Promise<{id: string, userId: string}>}
    */
   async findEmployeeById(id) {
     return this.db.Employee.findOne({
