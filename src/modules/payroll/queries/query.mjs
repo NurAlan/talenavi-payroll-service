@@ -45,4 +45,29 @@ export default class Query {
       attributes: {exclude: ['createdAt', 'updatedAt', 'deletedAt']}
     })
   }
+
+  /**
+   * 
+   * @param {{page: integer, size: integer, offset: integer}} params 
+   * @returns { Promise<{data, totalData: integer}> }
+   */
+  async findAllPayroll(params) {
+    const {rows: data, count: totalData} = await this.db.Payroll.findAndCountAll({
+      attributes: {exclude: ['createdAt', 'updatedAt', 'deletedAt']},
+      include: [
+        {
+          association: 'Employee',
+          attributes: ['position'],
+          include: [
+            {association: 'User', attributes: ['name']}
+          ]
+        }
+      ],
+      limit: params.size,
+      offset: params.offset,
+      order: ['id'],
+      raw: true
+    })
+    return {data, totalData}
+  }
 }
