@@ -15,5 +15,5 @@ export const checkIn = async(req, res) => {
 }
 
 export default {
-  checkIn,
+  checkIn
 }

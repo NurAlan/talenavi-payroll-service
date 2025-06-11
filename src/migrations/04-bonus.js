@@ -14,7 +14,7 @@ export default {
         type:Sequelize.INTEGER
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       created_at: {
         type: Sequelize.DATE,

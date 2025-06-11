@@ -1,16 +1,21 @@
 export default (sequelize, DataTypes) => {
-  const Bonus = sequelize.define('bonus', {
+  const Bonus = sequelize.define('Bonus', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    employee_id: DataTypes.INTEGER,
+    employeeId: DataTypes.INTEGER,
     month: DataTypes.STRING,
     amount: DataTypes.INTEGER,
-    description: DataTypes.STRING,
+    description: {type: DataTypes.STRING, allowNull: true},
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true
     }
+  },{
+    tableName: 'bonus',
+    underscored: true,
+    timestamps: true,
+    paranoid: true
   })
 
   Bonus.associate = models => {

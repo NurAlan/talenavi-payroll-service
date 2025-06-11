@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Employee = sequelize.define('employee', {
+  const Employee = sequelize.define('Employee', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     userId: DataTypes.INTEGER,
     position: DataTypes.STRING,

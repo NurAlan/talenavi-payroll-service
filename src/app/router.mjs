@@ -5,6 +5,7 @@ import admin from '../modules/admin/router.mjs'
 import user from '../modules/user/router.mjs'
 import setting from '../modules/setting/router.mjs'
 import attendance from '../modules/attendance/router.mjs'
+import bonus from '../modules/bonus/router.mjs'
 
 const router = Router()
 
@@ -14,6 +15,7 @@ router.use('/admin', admin)
 router.use('/user', user)
 router.use('/setting', setting)
 router.use('/attendance', attendance)
+router.use('/bonus', bonus)
 
 router.get('/health-check', (req, res) => {
   try {
