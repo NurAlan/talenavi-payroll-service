@@ -3,6 +3,7 @@ import employeRouter from '../modules/employee/router.mjs'
 import auth from '../modules/auth/router.mjs'
 import admin from '../modules/admin/router.mjs'
 import user from '../modules/user/router.mjs'
+import setting from '../modules/setting/router.mjs'
 
 const router = Router()
 
@@ -10,6 +11,7 @@ router.use('/employee', employeRouter)
 router.use('/auth', auth)
 router.use('/admin', admin)
 router.use('/user', user)
+router.use('/setting', setting)
 
 router.get('/health-check', (req, res) => {
   try {

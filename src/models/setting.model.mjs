@@ -1,7 +1,7 @@
 export default (sequelize, DataTypes) => {
   const Setting = sequelize.define('Setting', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    clockInn: DataTypes.TIME,
+    clockIn: DataTypes.TIME,
     clockOut: DataTypes.TIME,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
