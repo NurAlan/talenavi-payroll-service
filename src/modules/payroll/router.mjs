@@ -9,6 +9,7 @@ import wrapAsync from '../../helpers/utils/wrapAsync.mjs'
 const router = Router()
 
 router.post('/create', verifyJWT, wrapAsync(validateSchema(CommandSchema.create)), cHandler.create)
+router.post('/download-excel', verifyJWT, wrapAsync(validateSchema(CommandSchema.download)), cHandler.download)
 router.get('/', verifyJWT, wrapAsync(validateSchema(QuerySchema.list)), qHandler.list)
 
 export default router

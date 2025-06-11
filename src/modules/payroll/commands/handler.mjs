@@ -14,6 +14,17 @@ export const create = async(req, res) => {
   })
 }
 
+export const download = async(req, res) => {
+  const downloadData = await payroll.download(
+    req.locals.validated.body,
+    req.user.data
+  )
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+  res.setHeader('Content-Disposition', 'attachment; filename=laporan-gaji.xlsx')
+  res.send(downloadData)
+}
+
 export default {
-  create
+  create,
+  download
 }

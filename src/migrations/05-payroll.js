@@ -13,6 +13,12 @@ export default {
       calculated_salary: {
         type: Sequelize.INTEGER
       },
+      bonus: {
+        type: Sequelize.INTEGER
+      },
+      deduction: {
+        type: Sequelize.INTEGER
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

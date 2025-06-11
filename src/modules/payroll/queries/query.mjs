@@ -1,4 +1,4 @@
-import { endOfMonth, startOfDay, startOfMonth } from 'date-fns'
+import { endOfMonth, startOfMonth } from 'date-fns'
 import { Op } from 'sequelize'
 
 export default class Query {
@@ -72,5 +72,30 @@ export default class Query {
       raw: true
     })
     return {data, totalData}
+  }
+
+  /**
+   * 
+   * @param { {startMonth: date, endMonth: date}  } params 
+   */
+  async findPayroll(params) {
+    return await this.db.Payroll.findAll({
+      where: {
+        month: {
+          [Op.between]: [startOfMonth(params.startMonth), endOfMonth(params.endMonth)]
+        }
+      },
+      attribute: {exclude: ['createdAt', 'updatedAt', 'deletedAt']},
+      include:[
+        {
+          association: 'Employee',
+          attributes: ['position', 'baseSalary'],
+          include: [
+            {association: 'User', attributes: ['name', 'role']}
+          ]
+        }
+      ],
+      raw: true
+    })
   }
 }

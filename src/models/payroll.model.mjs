@@ -4,6 +4,8 @@ export default (sequelize, DataTypes) => {
     employeeId: DataTypes.INTEGER,
     month: DataTypes.DATE,
     calculatedSalary: DataTypes.INTEGER,
+    bonus: DataTypes.INTEGER,
+    deduction: DataTypes.INTEGER,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
     deletedAt: {

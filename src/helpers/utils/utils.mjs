@@ -14,3 +14,17 @@ export const getWorkdayDates = (month) => {
   const workdays = allDates.filter(date => !isWeekend(date))
   return workdays.map(date => format(date, 'yyyy-MM-dd'))
 }
+
+/**
+ * 
+ * @param {integer} number 
+ * @return { string } - Rp. xxx.xxx.xxx
+ */
+export const formatCurrencyIDR = (number) => {
+  return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(number)
+}
