@@ -14,4 +14,26 @@ export default class Command {
   async createBonus(payload) {
     return await this.db.Bonus.create(payload)
   }
+
+  /**
+   * 
+   * @param {string} id 
+   * @returns {Promise<void>}
+   */
+  async deleteBonus(id) {
+    return await this.db.Bonus.destroy({
+      where: {id}
+    })
+  }
+
+  /**
+   * 
+   * @param {string} id 
+   * @param { {month: string, amount: integer, description: string} } data 
+   */
+  async updateBonus(id, data) {
+    return this.db.Bonus.update(data,{
+      where: {id},
+    })
+  }
 }
