@@ -1,0 +1,48 @@
+import { Op } from 'sequelize'
+
+export default class Query {
+  constructor (db) {
+    /**
+     * @typedef {import('../../../models/index.mjs')} db
+     */
+    this.db = db
+  }
+
+  /**
+   * 
+   * @param {{employeeId: string, month: integer}} payload
+   * @returns 
+   */
+  async checkPayrollByIdMonth(payload) {
+    return await this.db.Payroll.findOne({
+      where: {
+        employeeId: payload.employeeId,
+        month: payload.month
+      },
+      attributes: {exclude: ['createdAt', 'updatedAt','deletedAt']}
+    })
+  }
+
+  /**
+   * 
+   * @param { {employeeId: string, startDate: Date, endDate: date} } payload
+   * @returns {Promise<{rows: integer, count}>}
+   */
+  async findAttendance(payload) {
+    return await this.db.Attendance.findAndCountAll({
+      where: {
+        employeeId: payload.employeeId,
+        date: {
+          [Op.between]: [
+            payload.startDate,
+            payload.endDate
+          ]
+        },
+        status: {
+          [Op.ne]: 'alfa'
+        },
+      },
+      attributes: {exclude: ['createdAt', 'updatedAt', 'deletedAt']}
+    })
+  }
+}

@@ -1,4 +1,4 @@
-import { Op } from 'sequelize'
+import { col, fn } from 'sequelize'
 
 export default class Command {
   constructor (db) {
@@ -47,6 +47,25 @@ export default class Command {
     return await this.db.Bonus.findOne({
       where: {id},
       attributes: {exclude: ['createdAt', 'updatedAt', 'deletedAt']}
+    })
+  }
+
+  /**
+   * 
+   * @param {string} id 
+   * @param {string} month 
+   * @returns 
+   */
+  async sumBonus(id, month) {
+    return await this.db.Bonus.findAll({
+      where: {
+        employeeId: id,
+        month: month
+      },
+      attributes: [
+        [fn('SUM', col('amount')), 'totalBonus']
+      ],
+      raw: true
     })
   }
 }

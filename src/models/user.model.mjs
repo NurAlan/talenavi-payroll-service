@@ -29,7 +29,7 @@ export default (sequelize, DataTypes) => {
   User.associate = models => {
     User.hasOne(models.Employee, {
       foreignKey: 'user_id',
-      as: 'employee' // opsional: untuk clarity di relasi
+      as: 'employee'
     });
   };
 

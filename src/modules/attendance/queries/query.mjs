@@ -29,6 +29,11 @@ export default class Query {
     })
   }
 
+  /**
+   * 
+   * @param {string} employeeId 
+   * @returns 
+   */
   async findAttendanceById(employeeId) {
     const now = new Date()
     return this.db.Attendance.findOne({

@@ -20,7 +20,7 @@ export default (sequelize, DataTypes) => {
   })
 
   Attendance.associate = models => {
-    Attendance.belongsTo(models.Employee, { foreignKey: 'employee_id' })
+    Attendance.belongsTo(models.Employee, { foreignKey: 'employeeId' })
   }
 
   return Attendance
