@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
   const Attendance = sequelize.define('Attendance', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     employeeId: DataTypes.INTEGER,
-    date: DataTypes.DATEONLY,
+    date: DataTypes.DATE,
     time: DataTypes.TIME,
     status: DataTypes.ENUM('hadir', 'terlambat', 'cuti', 'alfa'),
     createdAt: DataTypes.DATE,

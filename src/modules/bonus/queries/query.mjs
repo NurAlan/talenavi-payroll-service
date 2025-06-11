@@ -1,4 +1,5 @@
-import { col, fn } from 'sequelize'
+import { endOfMonth, startOfMonth } from 'date-fns'
+import { col, fn, Op } from 'sequelize'
 
 export default class Command {
   constructor (db) {
@@ -60,7 +61,9 @@ export default class Command {
     return await this.db.Bonus.findAll({
       where: {
         employeeId: id,
-        month: month
+        month: {
+          [Op.between]: [startOfMonth(month), endOfMonth(month)]
+        }
       },
       attributes: [
         [fn('SUM', col('amount')), 'totalBonus']

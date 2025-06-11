@@ -2,7 +2,12 @@ import z from "zod"
 
 const createBonus = z.object({
   employeeId: z.number().min(0),
-  month: z.number().int().min(1).max(12),
+  month: z.string().refine((val) => {
+    const date = new Date(val);
+    return !isNaN(date.getTime()) && val === date.toISOString();
+    }, {
+    message: "Harus dalam format ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ)",
+  }).transform((val) => new Date(val)),
   amount: z.number(),
   descrition: z.string().optional().nullable()
 })

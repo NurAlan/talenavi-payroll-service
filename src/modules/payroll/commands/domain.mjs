@@ -42,19 +42,17 @@ export default class Payroll {
     const bonus = parseInt(getBonuses[0]?.totalBonus || 0)
     //proses untuk mengambil hari kerja (senin - jumat)
     const getWorkDays = getWorkdayDates(payload.month)
-
     //proses untuk mengambil data absensi pada 1 bulan
-    const getDate = new Date(new Date().getFullYear(), payload.month - 1)
     const filter = {
       employeeId: payload.employeeId,
-      startDate: startOfMonth(getDate),
-      endDate: endOfMonth(getDate)
+      startDate: startOfMonth(payload.month),
+      endDate: endOfMonth(payload.month)
     }
     const {rows: data, count: totalData} = await this.query.findAttendance(filter)
     
     //proses menghitung alpha berdasarkan hari yang dia tidak absen karena di dokumen soal ga ada input untuk absen alpha
     //maka aku buat asumsinya hari yang tidak ada absen maka dia dianggap alpha
-    const presentDates = data.map(item => format(parseISO(item.date), 'yyyy-MM-dd'))
+    const presentDates = data.map(item => format(item.date, 'yyyy-MM-dd'))
     const alphaDates = getWorkDays.filter(date => !presentDates.includes(date))
 
     const deductionPerAbsence = Math.round(getEmploye.baseSalary / 22)

@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
   const Bonus = sequelize.define('Bonus', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     employeeId: DataTypes.INTEGER,
-    month: DataTypes.STRING,
+    month: DataTypes.DATE,
     amount: DataTypes.INTEGER,
     description: {type: DataTypes.STRING, allowNull: true},
     createdAt: DataTypes.DATE,
@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
   })
 
   Bonus.associate = models => {
-    Bonus.belongsTo(models.Employee, { foreignKey: 'employee_id' })
+    Bonus.belongsTo(models.Employee, { foreignKey: 'employeeId' })
   }
 
   return Bonus

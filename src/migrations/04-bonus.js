@@ -8,7 +8,7 @@ export default {
         onDelete: 'CASCADE'
       },
       month: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       amount: {
         type:Sequelize.INTEGER

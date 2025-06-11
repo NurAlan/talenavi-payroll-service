@@ -8,7 +8,7 @@ export default {
         onDelete: 'CASCADE'
       },
       date: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       time: {
         type:Sequelize.TIME

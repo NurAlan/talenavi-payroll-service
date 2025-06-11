@@ -21,8 +21,14 @@ export default class Bonus {
     }
 
     const {data, totalData} = await this.query.list({...payload, offset: (payload.page - 1) * payload.size})
+    const transformData = data.map(o => ({
+      ..._.pick(o, ['id', 'employeId', 'month', 'amount', 'description']),
+      position: o['Employee.position'],
+      name: o['Employee.User.name']
+    }))
+
     return {
-      data,
+      data: transformData,
       meta: {
         totalData,
         totalPage: Math.ceil(totalData/payload.size),

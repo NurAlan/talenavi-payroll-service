@@ -30,16 +30,17 @@ export default class Attendance {
 
     const checkIsAttendance = await this.query.findAttendanceById(getEmployeId.id)
     if(!_.isNil(checkIsAttendance)) {
-      throw new UnprocessableEntityError('Anda sudah melakukan absensi')
+      throw new UnprocessableEntityError('Anda sudah melakukan absensi hari ini')
     }
 
     const getSetting = await this.query.findSetting()
     if(_.isNil(getSetting)) {
-      throw new InternalServerError('Internal server error')
+      throw new UnprocessableEntityError('Waktu absensi belum di setting,silahkan hubungi admin')
     }
 
     const now = new Date()
     if(payload.status == 'hadir') {
+      //set date untuk mengecek terlambat atau tidak
       const splitTime = getSetting.clockIn.split(':').map(Number)
       const targetTime = set(new Date(), {
         hours: splitTime[0],

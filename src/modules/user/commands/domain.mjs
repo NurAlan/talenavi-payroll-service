@@ -21,7 +21,7 @@ export default class User {
         password: hashPassword
       }
       const insertUser = await this.command.createUser(setDocument)
-      return insertUser
+      return _.pick(insertUser.get({plain: true}), ['name', 'email'])
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError' || error.original?.code === 'ER_DUP_ENTRY') {
         throw new UnprocessableEntityError("email sudah digunakan")

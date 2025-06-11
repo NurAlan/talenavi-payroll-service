@@ -2,7 +2,7 @@ export default (sequelize, DataTypes) => {
   const Payroll = sequelize.define('Payroll', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     employeeId: DataTypes.INTEGER,
-    month: DataTypes.STRING,
+    month: DataTypes.DATE,
     calculatedSalary: DataTypes.INTEGER,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
   });
 
   Payroll.associate = models => {
-    Payroll.belongsTo(models.Employee, { foreignKey: 'employee_id' });
+    Payroll.belongsTo(models.Employee, { foreignKey: 'employeeId' });
   };
 
   return Payroll;

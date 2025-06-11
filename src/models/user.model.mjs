@@ -28,7 +28,7 @@ export default (sequelize, DataTypes) => {
 
   User.associate = models => {
     User.hasOne(models.Employee, {
-      foreignKey: 'user_id',
+      foreignKey: 'userId',
       as: 'employee'
     });
   };

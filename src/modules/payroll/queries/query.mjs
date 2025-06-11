@@ -1,3 +1,4 @@
+import { endOfMonth, startOfDay, startOfMonth } from 'date-fns'
 import { Op } from 'sequelize'
 
 export default class Query {
@@ -10,14 +11,16 @@ export default class Query {
 
   /**
    * 
-   * @param {{employeeId: string, month: integer}} payload
+   * @param {{employeeId: string, month: date}} payload
    * @returns 
    */
   async checkPayrollByIdMonth(payload) {
     return await this.db.Payroll.findOne({
       where: {
         employeeId: payload.employeeId,
-        month: payload.month
+        month: {
+          [Op.between]: [startOfMonth(payload.month), endOfMonth(payload.month)]
+        }
       },
       attributes: {exclude: ['createdAt', 'updatedAt','deletedAt']}
     })

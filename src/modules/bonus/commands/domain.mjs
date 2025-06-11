@@ -15,7 +15,7 @@ export default class Bonus {
 
   /**
    * 
-   * @param { {employeeId: string, month: string, amount: integer, description: string} } payload 
+   * @param { {employeeId: string, month: date, amount: integer, description: string} } payload 
    * @param { {id: string, name: string, role: string} } user
    * @returns { Promise<boolean> }
    */
