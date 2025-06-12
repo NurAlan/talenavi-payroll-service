@@ -30,8 +30,8 @@ Tes praktik untuk posisi **Backend Developer**, dengan membangun layanan penggaj
   
 
 ---
-
-### [EXAMPLE](./EXAMPLE.md)
+## Dokumentasi Service
+#### [EXAMPLE](./EXAMPLE.md)
 
   
 
