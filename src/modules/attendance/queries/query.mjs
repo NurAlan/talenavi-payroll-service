@@ -46,4 +46,45 @@ export default class Query {
       attributes: ['id']
     })
   }
+
+
+ /**
+   * @param { {page: Integer, size: Integer, offset: Integer, startDate: date, endDate: date} } params
+   * @returns {Promise<>}
+   */
+  async findAttendancePaginated(params) {
+
+    const where = {}
+    if (params.startDate) {
+      where.date = {
+        [Op.between]: [startOfDay(params.startDate), endOfDay(params.endDate)]
+      }
+    }
+    
+    const {rows: data, count: totalData} = await this.db.Attendance.findAndCountAll({
+      attributes: ['date', 'time', 'id', 'status'],
+      include: [
+        {
+          association: 'Employee',
+          attributes: ['position'],
+          include: [
+            {association: 'User', attributes: ['name']}
+          ]
+        }
+      ],
+      where: {
+        ...where
+      },
+      limit: params.size,
+      offset: params.offset,
+      order: [
+        'id'
+      ],
+      raw: true
+    })
+
+    return {
+      data, totalData
+    }
+  }
 }
