@@ -9,7 +9,7 @@ const createBonus = z.object({
     message: "Harus dalam format ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ)",
   }).transform((val) => new Date(val)),
   amount: z.number(),
-  descrition: z.string().optional().nullable()
+  description: z.string().optional().default(null)
 })
 
 const deleteBonus = z.object({

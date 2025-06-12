@@ -11,13 +11,13 @@
 ![Absensi Harian](./docs/gifs/attendance.gif)
 
 ### 🎁 5. Setup Bonus
-![Setup Bonus](./docs/gifs/attendance.gif)
+![Setup Bonus](./docs/gifs/bonus.gif)
 
 ### 💳 6. Create Payroll
-![Create Payroll](./docs/gifs/attendance.gif)
+![Create Payroll](./docs/gifs/payroll.gif)
 
 ### ⚙️ 7. Setup Setting
-![Setup Setting](./docs/gifs/attendance.gif)
+![Setup Setting](./docs/gifs/setting.gif)
 
 ### 📄 8. Download Report
-![Download Report](./docs/gifs/attendance.gif)
+![Download Report](./docs/gifs/report.gif)
