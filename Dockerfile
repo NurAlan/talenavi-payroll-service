@@ -1,4 +1,4 @@
-FROM node:22.1.4-alpine AS builder
+FROM node:22.14.0-alpine3.21 AS builder
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ RUN npm ci --omit=dev
 
 COPY . .
 
-FROM node:22.1.4-alpine
+FROM node:22.14.0-alpine3.21
 
 WORKDIR /app
 
@@ -15,4 +15,4 @@ COPY --from=builder /app /app
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
