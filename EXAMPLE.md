@@ -1,4 +1,4 @@
-### 🧪 1. Menjalankan service
+### 👩‍💻 1. Menjalankan service
 ![Start Service](./docs/gifs/start.gif)
 
 ### 🧪 2. Registrasi & Autentikasi
