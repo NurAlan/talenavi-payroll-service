@@ -2,95 +2,56 @@ pipeline {
   agent any
 
   environment {
-    APP_NAME = "payroll-service"
-    ENV = "production"
+    IMAGE_NAME = "yourdockeruser/your-app-name"
+    DOCKER_TAG = "latest"
   }
 
   options {
     timestamps()
-    timeout(time: 15, unit: 'MINUTES')
+    timeout(time: 20, unit: 'MINUTES')
   }
 
   stages {
     stage('Checkout') {
       steps {
         echo '📥 Checking out source code...'
-        checkout scm
+        checkout scmGit(
+          branches: [[name: '*/master']],
+          extensions: [],
+          userRemoteConfigs: [[
+            credentialsId: 'github-ssh-key',
+            url: 'git@github.com:NurAlan/talenavi-payroll-service.git'
+          ]]
+        )
       }
     }
 
-    stage('Lint') {
+    stage('Install Dependencies') {
       steps {
-        echo '🧹 Running linter...'
-        sh 'sleep 1'
+        echo '📦 Installing dependencies...'
+        sh 'npm install'
       }
     }
 
-    stage('Unit Test') {
+    stage('Build Docker Image') {
       steps {
-        echo '🧪 Running unit tests...'
-        sh 'sleep 2'
-      }
-    }
-
-    stage('Security Scan') {
-      steps {
-        echo '🔒 Running security scans...'
-        sh 'sleep 1'
-      }
-    }
-
-    stage('Build Info') {
-      steps {
-        echo "📦 App: ${APP_NAME}"
-        echo "🌍 Env: ${ENV}"
-        echo "🔖 Build ID: ${env.BUILD_ID}"
-      }
-    }
-
-    stage('Archive') {
-      steps {
-        echo '🗄️ Archiving build artifacts...'
-        sh 'sleep 1'
-      }
-    }
-
-    stage('Deploy to Staging') {
-      steps {
-        echo '🚀 Deploying to staging...'
-        sh 'sleep 2'
-      }
-    }
-
-    stage('Approval') {
-      steps {
-        input message: "Approve to deploy to production?"
-      }
-    }
-
-    stage('Deploy to Production') {
-      steps {
-        echo '🚀 Deploying to production...'
-        sh 'sleep 2'
-      }
-    }
-
-    stage('Notify') {
-      steps {
-        echo '📢 Notifying team of successful deployment...'
+        echo '🐳 Building Docker image...'
+        sh """
+          docker build -t ${IMAGE_NAME}:${DOCKER_TAG} .
+        """
       }
     }
   }
 
   post {
     success {
-      echo '✅ Pipeline completed successfully.'
+      echo '✅ Build and Docker image creation successful.'
     }
     failure {
       echo '❌ Pipeline failed.'
     }
     always {
-      echo '🧹 Cleaning up...'
+      echo '🧹 Cleaning workspace...'
       deleteDir()
     }
   }
