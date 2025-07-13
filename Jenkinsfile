@@ -2,123 +2,95 @@ pipeline {
   agent any
 
   environment {
+    APP_NAME = "payroll-service"
     ENV = "production"
-    VERSION = "1.0.0"
   }
 
   options {
     timestamps()
-    timeout(time: 20, unit: 'MINUTES')
+    timeout(time: 15, unit: 'MINUTES')
   }
 
   stages {
     stage('Checkout') {
       steps {
-        echo 'Checking out code...'
+        echo '📥 Checking out source code...'
         checkout scm
       }
     }
 
     stage('Lint') {
       steps {
-        echo 'Linting code...'
-        sh 'sleep 1' // simulasi lint
-      }
-    }
-
-    stage('Unit Tests') {
-      steps {
-        echo 'Running unit tests...'
-        sh 'sleep 2' // simulasi test
-      }
-    }
-
-    stage('Build Metadata') {
-      steps {
-        echo "Environment: ${ENV}"
-        echo "Version: ${VERSION}"
+        echo '🧹 Running linter...'
         sh 'sleep 1'
+      }
+    }
+
+    stage('Unit Test') {
+      steps {
+        echo '🧪 Running unit tests...'
+        sh 'sleep 2'
       }
     }
 
     stage('Security Scan') {
       steps {
-        echo 'Running security scans...'
+        echo '🔒 Running security scans...'
         sh 'sleep 1'
       }
     }
 
-    stage('Code Quality') {
+    stage('Build Info') {
       steps {
-        echo 'Analyzing code quality...'
+        echo "📦 App: ${APP_NAME}"
+        echo "🌍 Env: ${ENV}"
+        echo "🔖 Build ID: ${env.BUILD_ID}"
+      }
+    }
+
+    stage('Archive') {
+      steps {
+        echo '🗄️ Archiving build artifacts...'
         sh 'sleep 1'
       }
     }
 
-    stage('Integration Tests') {
+    stage('Deploy to Staging') {
       steps {
-        echo 'Running integration tests...'
+        echo '🚀 Deploying to staging...'
         sh 'sleep 2'
       }
     }
 
-    stage('Notify QA') {
+    stage('Approval') {
       steps {
-        echo 'Notifying QA team...'
-        sh 'sleep 1'
-      }
-    }
-
-    stage('Prepare Artifact') {
-      steps {
-        echo 'Packaging artifact...'
-        sh 'sleep 1'
-      }
-    }
-
-    stage('Upload to Staging') {
-      steps {
-        echo 'Uploading artifact to staging server...'
-        sh 'sleep 1'
-      }
-    }
-
-    stage('Manual Approval') {
-      steps {
-        input message: "Approve deployment to production?"
+        input message: "Approve to deploy to production?"
       }
     }
 
     stage('Deploy to Production') {
       steps {
-        echo 'Deploying to production...'
+        echo '🚀 Deploying to production...'
         sh 'sleep 2'
       }
     }
 
-    stage('Post-Deploy Tests') {
+    stage('Notify') {
       steps {
-        echo 'Running smoke tests...'
-        sh 'sleep 1'
-      }
-    }
-
-    stage('Notify Team') {
-      steps {
-        echo 'Sending deployment status to team...'
+        echo '📢 Notifying team of successful deployment...'
       }
     }
   }
 
   post {
     success {
-      echo 'Pipeline completed successfully.'
+      echo '✅ Pipeline completed successfully.'
     }
     failure {
-      echo 'Pipeline failed.'
+      echo '❌ Pipeline failed.'
     }
     always {
-      echo 'Cleaning up workspace...'
+      echo '🧹 Cleaning up...'
       deleteDir()
     }
   }
